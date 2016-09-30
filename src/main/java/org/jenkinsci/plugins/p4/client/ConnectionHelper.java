@@ -73,7 +73,7 @@ public class ConnectionHelper implements AutoCloseable {
 	protected final AuthorisationConfig authorisationConfig;
 	protected IOptionsServer connection;
 	protected final TaskListener listener;
-	protected final P4BaseCredentials p4credential;
+	public final P4BaseCredentials p4credential;
 	protected final Validate validate;
 
 	@Deprecated
