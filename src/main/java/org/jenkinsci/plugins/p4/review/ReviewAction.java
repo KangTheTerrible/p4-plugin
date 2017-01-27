@@ -107,6 +107,18 @@ public class ReviewAction<T extends Job<?, ?> & ParameterizedJob> implements Act
 		Jenkins j = Jenkins.getInstance();
 		if (j != null) {
 			Queue queue = j.getQueue();
+
+			String rev = params.getParameter(ReviewProp.REVIEW.getProp()).getValue().toString();
+			if(!rev.isEmpty())
+			{
+				Queue.Item[]  qb = queue.getItems();
+				for (Queue.Item bi : qb) {
+					String str = bi.getParams();
+					if (str.contains("\"review\": \"" + rev) && bi.getInQueueSince() > 0)
+						queue.cancel(bi);
+				}
+			}
+
 			queue.schedule(project, delay.getTime(), params, cause);
 
 			// send the user back to the job top page.
