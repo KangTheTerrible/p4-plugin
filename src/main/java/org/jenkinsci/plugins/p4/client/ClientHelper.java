@@ -1054,7 +1054,13 @@ public class ClientHelper extends ConnectionHelper {
 
 		List<IFileSpec> rsvMsg = iclient.resolveFilesAuto(files, rsvOpts);
 		validate.check(rsvMsg, "no file(s) to resolve");
-
+		if ("am".equals(mode)) {
+			for (IFileSpec fileSpec : rsvMsg) {
+				String msg = fileSpec.getStatusMessage();
+				if (msg != null && msg.contains("resolve skipped"))
+					throw new AbortException("Failed to resolve due to conflict");
+			}
+		}
 		log("... duration: " + timer.toString());
 	}
 
