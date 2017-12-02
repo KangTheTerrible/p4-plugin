@@ -150,6 +150,9 @@ public class CheckoutTask extends AbstractTask implements FileCallable<Boolean>,
 		// Unshelve review if specified
 		if (status == CheckoutStatus.SHELVED) {
 			p4.unshelveFiles(review);
+			for (P4Ref build : builds) {
+				p4.syncFiles(build, populate);
+			}
 			p4.resolveFiles("am");
 			if(populate instanceof AutoCleanImpl) {
 				AutoCleanImpl auto = (AutoCleanImpl) populate;
