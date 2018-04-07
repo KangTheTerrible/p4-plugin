@@ -153,7 +153,7 @@ public class CheckoutTask extends AbstractTask implements FileCallable<Boolean>,
 			for (P4Ref build : builds) {
 				p4.syncFiles(build, populate);
 			}
-			p4.resolveFiles("am");
+			p4.resolveFiles("af");
 			if(populate instanceof AutoCleanImpl) {
 				AutoCleanImpl auto = (AutoCleanImpl) populate;
 				if(auto.isTidy()) {
