@@ -38,3 +38,5 @@ tmp*
 
 # vim swap files
 .*.swp
+
+.vscode/
