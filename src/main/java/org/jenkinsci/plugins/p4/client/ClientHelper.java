@@ -1058,7 +1058,7 @@ public class ClientHelper extends ConnectionHelper {
 			for (IFileSpec fileSpec : rsvMsg) {
 				String msg = fileSpec.getStatusMessage();
 				if (msg != null && msg.contains("resolve skipped"))
-					throw new AbortException("Failed to resolve due to conflict");
+					throw new AbortException("Failed to resolve due to conflict\n" + msg);
 			}
 		}
 		log("... duration: " + timer.toString());
